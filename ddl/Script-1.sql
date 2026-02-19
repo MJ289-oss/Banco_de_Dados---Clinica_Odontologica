@@ -1,25 +1,25 @@
---script Parte 1:
+--script primeira parte:
+
+create database clinica_odontologica;
 
 create table paciente (
     id_paciente int not null,
-    id_convenio int,
     nome varchar(100) not null,
     cpf char(11) not null,
     data_nasc date,
     tel varchar(15),
     email varchar(50),
     constraint pk_id_paciente primary key (id_paciente),
-    constraint fk_paciente_convenio foreign key (id_convenio) references convenio(id_convenio)
 )
 
 create table funcionario (
     id_funcionario int not null,
     nome varchar(100) not null,
     cpf char(11) not null,
-    cargo varchar(30),
-    salario decimal(10,2),
+    cargo varchar(30) not null,
+    salario decimal(10,2) not null,
     login varchar(20),
-    senha varchar(100),
+    senha varchar(20),
     constraint pk_id_funcionario primary key (id_funcionario)
 )
 
@@ -31,17 +31,11 @@ create table especialidade (
 
 create table dentista (
     id_dentista int not null,
-    id_funcionario int not null,
-    id_especialidade int not null,
     cro varchar(15) not null,
     constraint pk_id_dentista primary key (id_dentista),
-    constraint fk_dentista_funcionario foreign key (id_funcionario) references funcionario(id_funcionario),
-    constraint fk_dentista_especialidade foreign key (id_especialidade) references especialidade(id_especialidade)
 )
 
---scripts da terceira parte
-
-create database clinica_odontologica;
+--script terceira parte:
 
 create table procedimento (
 id_procedimento int not null,
@@ -74,6 +68,6 @@ constraint pk_id_pagamento primary key (id_pagamento)
 
 create table forma_pagamento (
 id_forma_pagamento int not null,
-descricao varchar(20),
+descricao varchar(20) not null,
 constraint pk_id_forma_pagamento primary key (id_forma_pagamento)
 )
