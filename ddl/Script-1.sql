@@ -43,70 +43,63 @@ create table doenca (
     nome_doenca varchar(100) not null,
     descricao text,
     constraint pk_id_doenca primary key (id_doenca)
-);
+)
 
 create table anamnese (
-    id_anamnese int not null,
-    id_paciente int not null,
-    id_doenca int not null,
     data_registro date not null,
-    observacao text,
-    constraint pk_id_anamnese primary key (id_anamnese)
-);
+    observacao text
+)
 
 create table agendamento (
     id_agendamento int not null,
-    id_paciente int not null,
-    id_dentista int not null,
     data_hora timestamp not null,
     status varchar(30) not null,
     constraint pk_id_agendamento primary key (id_agendamento)
-);
+)
 
 create table consulta (
     id_consulta int not null,
-    id_agendamento int not null,
     data_realizacao timestamp not null,
     resumo_clinico text,
     constraint pk_id_consulta primary key (id_consulta)
-);
+)
 
     
 --script terceira parte:
 
 create table procedimento (
-id_procedimento int not null,
-nome varchar(50) not null,
-descricao_tecnica varchar(100) not null,
-constraint pk_id_procedimento primary key (id_procedimento)
+    id_procedimento int not null,
+    nome varchar(50) not null,
+    descricao_tecnica varchar(100) not null,
+    constraint pk_id_procedimento primary key (id_procedimento)
 )
 
 create table historico_preco (
-id_historico int not null,
-valor decimal(5,2) not null,
-data_inicio date not null,
-data_fim date,
-constraint pk_id_historico_preco primary key (id_historico)
+    id_historico int not null,
+    valor decimal(5,2) not null,
+    data_inicio date not null,
+    data_fim date,
+    constraint pk_id_historico_preco primary key (id_historico)
 )
 
 create table convenio (
-id_convenio int not null,
-nome_empresa varchar(20) not null,
-cnpj varchar(14) not null,
-registro_ans varchar(6) not null,
-constraint pk_id_convenio primary key (id_convenio)
+    id_convenio int not null,
+    nome_empresa varchar(20) not null,
+    cnpj varchar(14) not null,
+    registro_ans varchar(6) not null,
+    constraint pk_id_convenio primary key (id_convenio)
 )
 
 create table pagamento (
-id_pagamento int not null,
-valor_pago decimal(5,2) not null,
-constraint pk_id_pagamento primary key (id_pagamento)
+    id_pagamento int not null,
+    valor_pago decimal(5,2) not null,
+    constraint pk_id_pagamento primary key (id_pagamento)
 )
 
 create table forma_pagamento (
-id_forma_pagamento int not null,
-descricao varchar(20) not null,
-constraint pk_id_forma_pagamento primary key (id_forma_pagamento)
+    id_forma_pagamento int not null,
+    descricao varchar(20) not null,
+    constraint pk_id_forma_pagamento primary key (id_forma_pagamento)
 )
 
 -- quarta parte --
@@ -120,7 +113,6 @@ create table sala (
 
 create table equipamento (
     id_equipamento int not null,
-    id_sala int,
     nome varchar(100),
     ultima_manutencao date,
     constraint pk_id_equipamento primary key (id_equipamento)
@@ -136,7 +128,6 @@ create table fornecedor (
 
 create table estoque (
     id_item int not null,
-    id_fornecedor int,
     nome_material varchar(100),
     qtd_atual int,
     qtd_min int,
@@ -145,8 +136,6 @@ create table estoque (
 
 create table movimentacao_estoque (
     id_mov int not null,
-    id_item int,
-    id_funcionario int,
     tipo_mov varchar(50),
     quantidade int,
     constraint pk_id_mov primary key (id_mov)
