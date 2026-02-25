@@ -39,29 +39,31 @@ create table dentista (
 -- script Parte 2: Atendimento e Saúde
 
 create table doenca (
-    id_doenca int not null,
+    id int not null,
     nome_doenca varchar(100) not null,
-    descricao text,
-    constraint pk_id_doenca primary key (id_doenca)
+    descricao varchar(100) not null,
+    constraint pk_id_doenca primary key (id)
 )
 
 create table anamnese (
+    id int not null,
     data_registro date not null,
     observacao text
+    constraint pk_id_anamnese primary key (id)
 )
 
 create table agendamento (
-    id_agendamento int not null,
+    id int not null,
     data_hora timestamp not null,
-    status varchar(30) not null,
-    constraint pk_id_agendamento primary key (id_agendamento)
+    status varchar(100) not null,
+    constraint pk_id_agendamento primary key (id)
 )
 
 create table consulta (
-    id_consulta int not null,
+    id int not null,
     data_realizacao timestamp not null,
-    resumo_clinico text,
-    constraint pk_id_consulta primary key (id_consulta)
+    resumo_clinico varchar(200) not null,
+    constraint pk_id_consulta primary key (id)
 )
 
     
