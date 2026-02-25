@@ -107,21 +107,21 @@ create table forma_pagamento (
 -- quarta parte --
 
 create table sala (
-    id_sala int not null,
+    id int not null,
     numero varchar(20),
     tipo varchar(100),
     constraint pk_id_sala primary key (id_sala)
 )
 
 create table equipamento (
-    id_equipamento int not null,
+    id int not null,
     nome varchar(100),
     ultima_manutencao date,
     constraint pk_id_equipamento primary key (id_equipamento)
 )
 
 create table fornecedor (
-    id_fornecedor int not null,
+    id int not null,
     nome_fantasia varchar(150),
     cnpj varchar(20),
     telefone varchar(20),
@@ -129,7 +129,7 @@ create table fornecedor (
 )
 
 create table estoque (
-    id_item int not null,
+    id int not null,
     nome_material varchar(100),
     qtd_atual int,
     qtd_min int,
@@ -137,7 +137,7 @@ create table estoque (
 )
 
 create table movimentacao_estoque (
-    id_mov int not null,
+    id int not null,
     tipo_mov varchar(50),
     quantidade int,
     constraint pk_id_mov primary key (id_mov)
