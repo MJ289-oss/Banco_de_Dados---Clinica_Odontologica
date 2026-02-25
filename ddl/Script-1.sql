@@ -110,14 +110,14 @@ create table sala (
     id int not null,
     numero varchar(20),
     tipo varchar(100),
-    constraint pk_id_sala primary key (id_sala)
+    constraint pk_id_sala primary key (id)
 )
 
 create table equipamento (
     id int not null,
     nome varchar(100),
     ultima_manutencao date,
-    constraint pk_id_equipamento primary key (id_equipamento)
+    constraint pk_id_equipamento primary key (id)
 )
 
 create table fornecedor (
@@ -125,7 +125,7 @@ create table fornecedor (
     nome_fantasia varchar(150),
     cnpj varchar(20),
     telefone varchar(20),
-    constraint pk_id_fornecedor primary key (id_fornecedor)
+    constraint pk_id_fornecedor primary key (id)
 )
 
 create table estoque (
@@ -133,12 +133,12 @@ create table estoque (
     nome_material varchar(100),
     qtd_atual int,
     qtd_min int,
-    constraint pk_id_item primary key (id_item)
+    constraint pk_id_item primary key (id)
 )
 
 create table movimentacao_estoque (
     id int not null,
     tipo_mov varchar(50),
     quantidade int,
-    constraint pk_id_mov primary key (id_mov)
+    constraint pk_id_mov primary key (id)
 )
