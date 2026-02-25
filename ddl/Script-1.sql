@@ -3,36 +3,36 @@
 create database clinica_odontologica;
 
 create table paciente (
-    id_paciente int not null,
+    id int not null,
     nome varchar(100) not null,
     cpf char(11) not null,
     data_nasc date,
     tel varchar(15),
     email varchar(50),
-    constraint pk_id_paciente primary key (id_paciente),
+    constraint pk_id_paciente primary key (id),
 )
 
 create table funcionario (
-    id_funcionario int not null,
+    id int not null,
     nome varchar(100) not null,
     cpf char(11) not null,
     cargo varchar(30) not null,
     salario decimal(10,2) not null,
     login varchar(20),
     senha varchar(20),
-    constraint pk_id_funcionario primary key (id_funcionario)
+    constraint pk_id_funcionario primary key (id)
 )
 
 create table especialidade (
-    id_especialidade int not null,
+    id int not null,
     nome_especialidade varchar(50) not null,
-    constraint pk_id_especialidade primary key (id_especialidade)
+    constraint pk_id_especialidade primary key (id)
 )
 
 create table dentista (
-    id_dentista int not null,
+    id int not null,
     cro varchar(15) not null,
-    constraint pk_id_dentista primary key (id_dentista),
+    constraint pk_id_dentista primary key (id),
 )
 
 
