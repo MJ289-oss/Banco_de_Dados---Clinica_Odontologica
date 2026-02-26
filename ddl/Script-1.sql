@@ -78,10 +78,12 @@ create table procedimento (
 
 create table historico_preco (
     id int not null,
+    id_procedimento int not null,
     valor decimal(6,2) not null,
     data_inicio date not null,
     data_fim date,
-    constraint pk_id_historico_preco primary key (id)
+    constraint pk_id_historico_preco primary key (id),
+    constraint fk_historico_procedimento foreign key (id_procedimento) references procedimento(id)
 )
 
 create table convenio (
@@ -94,8 +96,12 @@ create table convenio (
 
 create table pagamento (
     id int not null,
+    id_consulta int not null,
+    id_forma_pagamento int not null,
     valor_pago decimal(6,2) not null,
     constraint pk_id_pagamento primary key (id)
+    constraint fk_pagamento_consulta foreign key (id_consulta) references consulta(id),
+    constraint fk_pagamento_forma foreign key (id_forma_pagamento) references forma_pagamento(id)
 )
 
 create table forma_pagamento (
