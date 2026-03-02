@@ -21,7 +21,7 @@ create table funcionario (
     login varchar(20),
     senha varchar(20),
     constraint pk_id_funcionario primary key (id)
-)
+    )
 
 create table especialidade (
     id int not null,
@@ -33,6 +33,8 @@ create table dentista (
     id int not null,
     cro varchar(15) not null,
     constraint pk_id_dentista primary key (id),
+    constraint fk_dentista_funcionario foreign key (pk_id_funcionario) references funcionario(id)
+    constraint fk_dentista_especialidade foreign key (pk_id_especialidade) references especialidade(id)
 )
 
 
