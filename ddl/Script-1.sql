@@ -59,6 +59,8 @@ create table agendamento (
     data_hora timestamp not null,
     status varchar(100) not null,
     constraint pk_id_agendamento primary key (id)
+    constraint fk_consulta_agendamento foreign key (id_agendamento) references agendamento(id),
+    constraint fk_consulta_doenca foreign key (id_doenca) references doenca(id)
 )
 
 create table consulta (
@@ -66,6 +68,7 @@ create table consulta (
     data_realizacao timestamp not null,
     resumo_clinico varchar(200) not null,
     constraint pk_id_consulta primary key (id)
+    constraint fk_anamnese_consulta foreign key (id_consulta) references consulta(id)
 )
 
     
