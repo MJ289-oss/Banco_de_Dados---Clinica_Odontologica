@@ -52,6 +52,7 @@ create table anamnese (
     data_registro date not null,
     observacao text
     constraint pk_id_anamnese primary key (id)
+    constraint fk_anamnese_paciente foreign key (id_paciente) references paciente(id)
 )
 
 create table agendamento (
@@ -59,8 +60,8 @@ create table agendamento (
     data_hora timestamp not null,
     status varchar(100) not null,
     constraint pk_id_agendamento primary key (id)
-    constraint fk_consulta_agendamento foreign key (id_agendamento) references agendamento(id),
-    constraint fk_consulta_doenca foreign key (id_doenca) references doenca(id)
+    constraint fk_agendamento_paciente foreign key (id_paciente) references paciente(id),
+    constraint fk_agendamento_funcionario foreign key (id_funcionario) references funcionario(id)
 )
 
 create table consulta (
@@ -68,10 +69,10 @@ create table consulta (
     data_realizacao timestamp not null,
     resumo_clinico varchar(200) not null,
     constraint pk_id_consulta primary key (id)
-    constraint fk_anamnese_consulta foreign key (id_consulta) references consulta(id)
+    constraint fk_consulta_agendamento foreign key (id_agendamento) references agendamento(id),
+    constraint fk_consulta_anamnese foreign key (id_anamnese) references anamnese(id)
 )
 
-    
 --script terceira parte:
 
 create table procedimento (
