@@ -126,9 +126,11 @@ create table sala (
 
 create table equipamento (
     id int not null,
+    id_sala int not null,
     nome varchar(100),
     ultima_manutencao date,
-    constraint pk_id_equipamento primary key (id)
+    constraint pk_id_equipamento primary key (id),
+    constraint fk_equipamento_sala foreign key (id_sala) references sala(id)
 )
 
 create table fornecedor (
@@ -141,15 +143,22 @@ create table fornecedor (
 
 create table estoque (
     id int not null,
+    id_fornecedor int not null,
     nome_material varchar(100),
     qtd_atual int,
     qtd_min int,
-    constraint pk_id_item primary key (id)
+    constraint pk_id_item primary key (id),
+    constraint fk_estoque_fornecedor foreign key (id_fornecedor) references fornecedor(id)
 )
 
 create table movimentacao_estoque (
     id int not null,
+    id_item int not null,
+    id_funcionario int not null,
     tipo_mov varchar(50),
     quantidade int,
-    constraint pk_id_mov primary key (id)
+    constraint pk_id_mov primary key (id),
+    constraint fk_movimentacao_item foreign key (id_item) references estoque(id),
+    constraint fk_movimentacao_funcionario foreign key (id_funcionario) references funcionario(id
+    )
 )
