@@ -4,6 +4,7 @@ create database clinica_odontologica;
 
 create table paciente (
     id int not null,
+    id_convenio int,
     nome varchar(100) not null,
     cpf char(11) not null,
     data_nasc date,
@@ -31,6 +32,8 @@ create table especialidade (
 
 create table dentista (
     id int not null,
+    id_funcionario int not null,
+    id_especialidade int not null,
     cro varchar(15) not null,
     constraint pk_id_dentista primary key (id),
     constraint fk_dentista_funcionario foreign key (pk_id_funcionario) references funcionario(id)
