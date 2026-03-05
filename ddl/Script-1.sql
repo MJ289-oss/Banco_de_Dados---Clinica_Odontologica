@@ -4,13 +4,13 @@ create database clinica_odontologica;
 
 create table paciente (
     id int not null,
-    id_convenio int,
+    id_convenio int not null,
     nome varchar(100) not null,
     cpf char(11) not null,
     data_nasc date,
     tel varchar(15),
     email varchar(50),
-    constraint pk_id_paciente primary key (id),
+    constraint pk_id_paciente primary key (id)
 )
 
 create table funcionario (
