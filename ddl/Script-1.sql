@@ -41,7 +41,6 @@ create table dentista (
     constraint fk_dentista_especialidade foreign key (id_especialidade) references especialidade(id)
 )
 
-
 -- script Parte 2: Atendimento e Saúde
 
 create table doenca (
@@ -49,33 +48,40 @@ create table doenca (
     nome_doenca varchar(100) not null,
     descricao varchar(100) not null,
     constraint pk_id_doenca primary key (id)
-)
+);
 
 create table anamnese (
     id int not null,
+    id_paciente int not null,
+    id_doenca int not null,
     data_registro date not null,
-    observacao text
-    constraint pk_id_anamnese primary key (id)
-    constraint fk_anamnese_paciente foreign key (id_paciente) references paciente(id)
-)
+    observacao varchar(200),
+    constraint pk_id_anamnese primary key (id),
+    constraint fk_anamnese_paciente foreign key (id_paciente) references paciente(id),
+    constraint fk_anamnese_doenca foreign key (id_doenca) references doenca(id)
+);
 
 create table agendamento (
     id int not null,
+    id_paciente int not null,
+    id_dentista int not null,
     data_hora timestamp not null,
     status varchar(100) not null,
-    constraint pk_id_agendamento primary key (id)
+    constraint pk_id_agendamento primary key (id),
     constraint fk_agendamento_paciente foreign key (id_paciente) references paciente(id),
-    constraint fk_agendamento_funcionario foreign key (id_funcionario) references funcionario(id)
-)
+    constraint fk_agendamento_dentista foreign key (id_dentista) references dentista(id)
+);
 
 create table consulta (
     id int not null,
+    id_agendamento int not null,
+    id_anamnese int not null,
     data_realizacao timestamp not null,
     resumo_clinico varchar(200) not null,
-    constraint pk_id_consulta primary key (id)
+    constraint pk_id_consulta primary key (id),
     constraint fk_consulta_agendamento foreign key (id_agendamento) references agendamento(id),
     constraint fk_consulta_anamnese foreign key (id_anamnese) references anamnese(id)
-)
+);
 
 --script terceira parte:
 
