@@ -11,6 +11,7 @@ create table paciente (
     tel varchar(15),
     email varchar(50),
     constraint pk_id_paciente primary key (id)
+    constraint fk_paciente_convenio foreign key (id_convenio) references convenio(id)
 )
 
 create table funcionario (
@@ -36,8 +37,8 @@ create table dentista (
     id_especialidade int not null,
     cro varchar(15) not null,
     constraint pk_id_dentista primary key (id),
-    constraint fk_dentista_funcionario foreign key (pk_id_funcionario) references funcionario(id)
-    constraint fk_dentista_especialidade foreign key (pk_id_especialidade) references especialidade(id)
+    constraint fk_dentista_funcionario foreign key (id_funcionario) references funcionario(id)
+    constraint fk_dentista_especialidade foreign key (id_especialidade) references especialidade(id)
 )
 
 
