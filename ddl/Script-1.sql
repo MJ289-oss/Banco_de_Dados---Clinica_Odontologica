@@ -1,175 +1,186 @@
---script primeira parte:
+CREATE DATABASE IF NOT EXISTS clinica_odontologica;
+USE clinica_odontologica;
 
-create database clinica_odontologica;
+DROP TABLE IF EXISTS movimentacao_estoque;
+DROP TABLE IF EXISTS estoque;
+DROP TABLE IF EXISTS equipamento;
+DROP TABLE IF EXISTS pagamento;
+DROP TABLE IF EXISTS consulta;
+DROP TABLE IF EXISTS agendamento;
+DROP TABLE IF EXISTS anamnese;
+DROP TABLE IF EXISTS historico_preco;
+DROP TABLE IF EXISTS dentista;
+DROP TABLE IF EXISTS paciente;
+DROP TABLE IF EXISTS funcionario;
+DROP TABLE IF EXISTS fornecedor;
+DROP TABLE IF EXISTS sala;
+DROP TABLE IF EXISTS forma_pagamento;
+DROP TABLE IF EXISTS convenio;
+DROP TABLE IF EXISTS procedimento;
+DROP TABLE IF EXISTS doenca;
+DROP TABLE IF EXISTS especialidade;
 
-create table paciente (
-    id int not null,
-    id_convenio int not null,
-    nome varchar(100) not null,
-    cpf char(11) not null,
-    data_nasc date,
-    tel varchar(15),
-    email varchar(50),
-    constraint pk_id_paciente primary key (id)
-    constraint fk_paciente_convenio foreign key (id_convenio) references convenio(id)
-)
-
-create table funcionario (
-    id int not null,
-    nome varchar(100) not null,
-    cpf char(11) not null,
-    cargo varchar(30) not null,
-    salario decimal(10,2) not null,
-    login varchar(20),
-    senha varchar(20),
-    constraint pk_id_funcionario primary key (id)
-    )
-
-create table especialidade (
-    id int not null,
-    nome_especialidade varchar(50) not null,
-    constraint pk_id_especialidade primary key (id)
-)
-
-create table dentista (
-    id int not null,
-    id_funcionario int not null,
-    id_especialidade int not null,
-    cro varchar(15) not null,
-    constraint pk_id_dentista primary key (id),
-    constraint fk_dentista_funcionario foreign key (id_funcionario) references funcionario(id)
-    constraint fk_dentista_especialidade foreign key (id_especialidade) references especialidade(id)
-)
-
--- script Parte 2: Atendimento e Saúde
-
-create table doenca (
-    id int not null,
-    nome_doenca varchar(100) not null,
-    descricao varchar(100) not null,
-    constraint pk_id_doenca primary key (id)
+CREATE TABLE especialidade (
+    id INT NOT NULL,
+    nome_especialidade VARCHAR(100) NOT NULL,
+    CONSTRAINT pk_id_especialidade PRIMARY KEY (id)
 );
 
-create table anamnese (
-    id int not null,
-    id_paciente int not null,
-    id_doenca int not null,
-    data_registro date not null,
-    observacao varchar(200),
-    constraint pk_id_anamnese primary key (id),
-    constraint fk_anamnese_paciente foreign key (id_paciente) references paciente(id),
-    constraint fk_anamnese_doenca foreign key (id_doenca) references doenca(id)
+CREATE TABLE doenca (
+    id INT NOT NULL,
+    nome_doenca VARCHAR(100) NOT NULL,
+    descricao VARCHAR(500),
+    CONSTRAINT pk_id_doenca PRIMARY KEY (id)
 );
 
-create table agendamento (
-    id int not null,
-    id_paciente int not null,
-    id_dentista int not null,
-    data_hora timestamp not null,
-    status varchar(100) not null,
-    constraint pk_id_agendamento primary key (id),
-    constraint fk_agendamento_paciente foreign key (id_paciente) references paciente(id),
-    constraint fk_agendamento_dentista foreign key (id_dentista) references dentista(id)
+CREATE TABLE procedimento (
+    id INT NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    descricao_tecnica VARCHAR(500),
+    CONSTRAINT pk_id_procedimento PRIMARY KEY (id)
 );
 
-create table consulta (
-    id int not null,
-    id_agendamento int not null,
-    id_anamnese int not null,
-    data_realizacao timestamp not null,
-    resumo_clinico varchar(200) not null,
-    constraint pk_id_consulta primary key (id),
-    constraint fk_consulta_agendamento foreign key (id_agendamento) references agendamento(id),
-    constraint fk_consulta_anamnese foreign key (id_anamnese) references anamnese(id)
+CREATE TABLE convenio (
+    id INT NOT NULL,
+    nome_empresa VARCHAR(150) NOT NULL,
+    cnpj CHAR(14) UNIQUE NOT NULL,
+    registro_ans VARCHAR(20) UNIQUE,
+    CONSTRAINT pk_id_convenio PRIMARY KEY (id)
 );
 
---script terceira parte:
+CREATE TABLE forma_pagamento (
+    id INT NOT NULL,
+    descricao VARCHAR(50) NOT NULL,
+    CONSTRAINT pk_id_forma_pagamento PRIMARY KEY (id)
+);
 
-create table procedimento (
-    id int not null,
-    nome varchar(50) not null,
-    descricao_tecnica text not null,
-    constraint pk_id_procedimento primary key (id)
-)
+CREATE TABLE sala (
+    id INT NOT NULL,
+    numero INT NOT NULL,
+    tipo VARCHAR(50),
+    CONSTRAINT pk_id_sala PRIMARY KEY (id)
+);
 
-create table historico_preco (
-    id int not null,
-    id_procedimento int not null,
-    valor decimal(6,2) not null,
-    data_inicio date not null,
-    data_fim date,
-    constraint pk_id_historico_preco primary key (id),
-    constraint fk_historico_procedimento foreign key (id_procedimento) references procedimento(id)
-)
+CREATE TABLE fornecedor (
+    id INT NOT NULL,
+    nome_fantasia VARCHAR(150) NOT NULL,
+    cnpj CHAR(14) UNIQUE NOT NULL,
+    telefone VARCHAR(15),
+    CONSTRAINT pk_id_fornecedor PRIMARY KEY (id)
+);
 
-create table convenio (
-    id int not null,
-    nome_empresa varchar(20) not null,
-    cnpj varchar(14) not null,
-    registro_ans varchar(6) not null,
-    constraint pk_id_convenio primary key (id)
-)
+CREATE TABLE funcionario (
+    id INT NOT NULL,
+    nome VARCHAR(150) NOT NULL,
+    cpf CHAR(11) UNIQUE NOT NULL,
+    cargo VARCHAR(50),
+    salario DECIMAL(10,2),
+    login VARCHAR(50) UNIQUE NOT NULL,
+    senha VARCHAR(50) NOT NULL,
+    CONSTRAINT pk_id_funcionario PRIMARY KEY (id)
+);
 
-create table pagamento (
-    id int not null,
-    id_consulta int not null,
-    id_forma_pagamento int not null,
-    valor_pago decimal(6,2) not null,
-    constraint pk_id_pagamento primary key (id)
-    constraint fk_pagamento_consulta foreign key (id_consulta) references consulta(id),
-    constraint fk_pagamento_forma foreign key (id_forma_pagamento) references forma_pagamento(id)
-)
+CREATE TABLE paciente (
+    id INT NOT NULL,
+    id_convenio INT,
+    nome VARCHAR(150) NOT NULL,
+    cpf CHAR(11) UNIQUE NOT NULL,
+    data_nasc DATE NOT NULL,
+    tel VARCHAR(15),
+    email VARCHAR(100),
+    CONSTRAINT pk_id_paciente PRIMARY KEY (id),
+    CONSTRAINT fk_paciente_convenio FOREIGN KEY (id_convenio) REFERENCES convenio(id)
+);
 
-create table forma_pagamento (
-    id int not null,
-    descricao varchar(20) not null,
-    constraint pk_id_forma_pagamento primary key (id)
-)
+CREATE TABLE dentista (
+    id INT NOT NULL,
+    id_funcionario INT NOT NULL,
+    id_especialidade INT NOT NULL,
+    cro VARCHAR(20) UNIQUE NOT NULL,
+    CONSTRAINT pk_id_dentista PRIMARY KEY (id),
+    CONSTRAINT fk_dentista_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionario(id),
+    CONSTRAINT fk_dentista_especialidade FOREIGN KEY (id_especialidade) REFERENCES especialidade(id)
+);
 
--- quarta parte --
+CREATE TABLE historico_preco (
+    id INT NOT NULL,
+    id_procedimento INT NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
+    data_inicio DATE NOT NULL,
+    data_fim DATE,
+    CONSTRAINT pk_id_historico PRIMARY KEY (id),
+    CONSTRAINT fk_historico_procedimento FOREIGN KEY (id_procedimento) REFERENCES procedimento(id)
+);
 
-create table sala (
-    id int not null,
-    numero varchar(20),
-    tipo varchar(100),
-    constraint pk_id_sala primary key (id)
-)
+CREATE TABLE anamnese (
+    id INT NOT NULL,
+    id_paciente INT NOT NULL,
+    id_doenca INT NOT NULL,
+    data_registro DATE NOT NULL,
+    observacao VARCHAR(500),
+    CONSTRAINT pk_id_anamnese PRIMARY KEY (id),
+    CONSTRAINT fk_anamnese_paciente FOREIGN KEY (id_paciente) REFERENCES paciente(id),
+    CONSTRAINT fk_anamnese_doenca FOREIGN KEY (id_doenca) REFERENCES doenca(id)
+);
 
-create table equipamento (
-    id int not null,
-    id_sala int not null,
-    nome varchar(100),
-    ultima_manutencao date,
-    constraint pk_id_equipamento primary key (id),
-    constraint fk_equipamento_sala foreign key (id_sala) references sala(id)
-)
+CREATE TABLE agendamento (
+    id INT NOT NULL,
+    id_paciente INT NOT NULL,
+    id_dentista INT NOT NULL,
+    data_hora DATETIME NOT NULL,
+    status VARCHAR(20),
+    CONSTRAINT pk_id_agendamento PRIMARY KEY (id),
+    CONSTRAINT fk_agendamento_paciente FOREIGN KEY (id_paciente) REFERENCES paciente(id),
+    CONSTRAINT fk_agendamento_dentista FOREIGN KEY (id_dentista) REFERENCES dentista(id)
+);
 
-create table fornecedor (
-    id int not null,
-    nome_fantasia varchar(150),
-    cnpj varchar(20),
-    telefone varchar(20),
-    constraint pk_id_fornecedor primary key (id)
-)
+CREATE TABLE consulta (
+    id INT NOT NULL,
+    id_agendamento INT NOT NULL,
+    id_anamnese INT NOT NULL,
+    data_realizacao DATETIME NOT NULL,
+    resumo_clinico VARCHAR(500),
+    CONSTRAINT pk_id_consulta PRIMARY KEY (id),
+    CONSTRAINT fk_consulta_agendamento FOREIGN KEY (id_agendamento) REFERENCES agendamento(id),
+    CONSTRAINT fk_consulta_anamnese FOREIGN KEY (id_anamnese) REFERENCES anamnese(id)
+);
 
-create table estoque (
-    id int not null,
-    id_fornecedor int not null,
-    nome_material varchar(100),
-    qtd_atual int,
-    qtd_min int,
-    constraint pk_id_item primary key (id),
-    constraint fk_estoque_fornecedor foreign key (id_fornecedor) references fornecedor(id)
-)
+CREATE TABLE pagamento (
+    id INT NOT NULL,
+    id_consulta INT NOT NULL,
+    id_forma_pagamento INT NOT NULL,
+    valor_pago DECIMAL(10,2) NOT NULL,
+    CONSTRAINT pk_id_pagamento PRIMARY KEY (id),
+    CONSTRAINT fk_pagamento_consulta FOREIGN KEY (id_consulta) REFERENCES consulta(id),
+    CONSTRAINT fk_pagamento_forma FOREIGN KEY (id_forma_pagamento) REFERENCES forma_pagamento(id)
+);
 
-create table movimentacao_estoque (
-    id int not null,
-    id_item int not null,
-    id_funcionario int not null,
-    tipo_mov varchar(50),
-    quantidade int,
-    constraint pk_id_mov primary key (id),
-    constraint fk_movimentacao_item foreign key (id_item) references estoque(id),
-    constraint fk_movimentacao_funcionario foreign key (id_funcionario) references funcionario(id
-    )
-)
+CREATE TABLE equipamento (
+    id INT NOT NULL,
+    id_sala INT NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    ultima_manutencao DATE,
+    CONSTRAINT pk_id_equipamento PRIMARY KEY (id),
+    CONSTRAINT fk_equipamento_sala FOREIGN KEY (id_sala) REFERENCES sala(id)
+);
+
+CREATE TABLE estoque (
+    id INT NOT NULL,
+    id_fornecedor INT NOT NULL,
+    nome_material VARCHAR(100) NOT NULL,
+    qtd_atual INT,
+    qtd_min INT,
+    CONSTRAINT pk_id_estoque PRIMARY KEY (id),
+    CONSTRAINT fk_estoque_fornecedor FOREIGN KEY (id_fornecedor) REFERENCES fornecedor(id)
+);
+
+CREATE TABLE movimentacao_estoque (
+    id INT NOT NULL,
+    id_item INT NOT NULL,
+    id_funcionario INT NOT NULL,
+    tipo_mov VARCHAR(20),
+    quantidade INT NOT NULL,
+    CONSTRAINT pk_id_movimentacao PRIMARY KEY (id),
+    CONSTRAINT fk_movimentacao_item FOREIGN KEY (id_item) REFERENCES estoque(id),
+    CONSTRAINT fk_movimentacao_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionario(id)
+);
