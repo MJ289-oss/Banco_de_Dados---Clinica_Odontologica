@@ -234,3 +234,35 @@ INSERT INTO dentista (id, id_funcionario, id_especialidade, cro) VALUES
 (13,14,1,'CRO13'),(14,15,2,'CRO14'),(15,16,3,'CRO15'),(16,17,1,'CRO16'),(17,18,2,'CRO17'),(18,19,3,'CRO18'),
 (19,20,1,'CRO19'),(20,21,2,'CRO20'),(21,22,3,'CRO21'),(22,2,1,'CRO22'),(23,3,2,'CRO23'),(24,4,3,'CRO24'),
 (25,5,1,'CRO25'),(26,6,2,'CRO26'),(27,7,3,'CRO27'),(28,8,1,'CRO28'),(29,9,2,'CRO29'),(30,10,3,'CRO30');
+
+-- Consulta (Filha de Agendamento/Anamnese) - 30 Registros
+INSERT INTO consulta (id, id_agendamento, id_anamnese, data_realizacao, resumo_clinico) VALUES 
+(1,1,1,'2024-04-01','Limpeza'),(2,2,2,'2024-04-01','Canal'),(3,3,3,'2024-04-01','Extração'),
+(4,4,4,'2024-04-01','Limpeza'),(5,5,5,'2024-04-01','Canal'),(6,6,6,'2024-04-01','Extração'),
+(7,7,7,'2024-04-02','Limpeza'),(8,8,8,'2024-04-02','Canal'),(9,9,9,'2024-04-02','Extração'),
+(10,10,10,'2024-04-02','Limpeza'),(11,11,11,'2024-04-02','Canal'),(12,12,12,'2024-04-02','Extração'),
+(13,13,13,'2024-04-03','Limpeza'),(14,14,14,'2024-04-03','Canal'),(15,15,15,'2024-04-03','Extração'),
+(16,16,16,'2024-04-03','Limpeza'),(17,17,17,'2024-04-03','Canal'),(18,18,18,'2024-04-03','Extração'),
+(19,19,19,'2024-04-04','Limpeza'),(20,20,20,'2024-04-04','Canal'),(21,21,21,'2024-04-04','Extração'),
+(22,22,22,'2024-04-04','Limpeza'),(23,23,23,'2024-04-04','Canal'),(24,24,24,'2024-04-04','Extração'),
+(25,25,25,'2024-04-05','Limpeza'),(26,26,26,'2024-04-05','Canal'),(27,27,27,'2024-04-05','Extração'),
+(28,28,28,'2024-04-05','Limpeza'),(29,29,29,'2024-04-05','Canal'),(30,30,30,'2024-04-05','Extração');
+
+-- Pagamento (Filha de Consulta/FormaPagamento) - 30 Registros
+INSERT INTO pagamento (id, id_consulta, id_forma_pagamento, valor_pago) VALUES 
+(1,1,1,150),(2,2,2,150),(3,3,3,150),(4,4,1,150),(5,5,2,150),(6,6,3,150),(7,7,1,150),(8,8,2,150),(9,9,3,150),(10,10,1,150),
+(11,11,2,150),(12,12,3,150),(13,13,1,150),(14,14,2,150),(15,15,3,150),(16,16,1,150),(17,17,2,150),(18,18,3,150),(19,19,1,150),(20,20,2,150),
+(21,21,3,150),(22,22,1,150),(23,23,2,150),(24,24,3,150),(25,25,1,150),(26,26,2,150),(27,27,3,150),(28,28,1,150),(29,29,2,150),(30,30,3,150);
+
+-- Estoque (Filha de Fornecedor) - 30 Registros
+INSERT INTO estoque (id, id_fornecedor, nome_material, qtd_atual, qtd_min) VALUES 
+(1,1,'Luva P',50,10),(2,1,'Luva M',50,10),(3,1,'Luva G',50,10),(4,2,'Mascara',50,10),(5,2,'Sugador',50,10),(6,2,'Agulha',50,10),
+(7,3,'Resina 1',50,10),(8,3,'Resina 2',50,10),(9,3,'Resina 3',50,10),(10,1,'Gaze',50,10),(11,1,'Touca',50,10),(12,1,'Alcool',50,10),
+(13,2,'Cimento',50,10),(14,2,'Pasta',50,10),(15,2,'Broca 1',50,10),(16,3,'Broca 2',50,10),(17,3,'Matriz',50,10),(18,3,'Acido',50,10),
+(19,1,'Selante',50,10),(20,1,'Cunha',50,10),(21,2,'Moldeira',50,10),(22,2,'Gesso',50,10),(23,2,'Alginato',50,10),(24,3,'Papel Art',50,10),
+(25,3,'Fio Dent',50,10),(26,3,'Disco',50,10),(27,1,'Lixa',50,10),(28,1,'Espelho',50,10),(29,2,'Pinca',50,10),(30,3,'Sonda',50,10);
+
+-- Tabelas Complementares (3 Registros cada)
+INSERT INTO equipamento VALUES (1,1,'Cadeira A','2023-10-01'),(2,2,'Autoclave','2023-11-01'),(3,3,'Raio X','2024-01-01');
+INSERT INTO historico_preco VALUES (1,1,150.00,'2023-01-01',NULL),(2,2,400.00,'2023-01-01',NULL),(3,3,250.00,'2023-01-01',NULL);
+INSERT INTO movimentacao_estoque VALUES (1,1,1,'ENTRADA',10),(2,2,23,'ENTRADA',10),(3,3,27,'SAIDA',1);
