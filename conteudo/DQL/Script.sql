@@ -21,3 +21,27 @@ FROM paciente p LEFT JOIN convenio c ON p.id_convenio = c.id;
 -- 6. Detalhes da consulta e contato do paciente
 SELECT c.resumo_clinico, p.tel, p.email 
 FROM consulta c JOIN agendamento a ON c.id_agendamento = a.id JOIN paciente p ON a.id_paciente = p.id;
+
+-- 7. Especialidades e Dentistas (mesmo vazias)
+SELECT e.nome_especialidade, f.nome 
+FROM especialidade e LEFT JOIN dentista d ON e.id = d.id_especialidade LEFT JOIN funcionario f ON d.id_funcionario = f.id;
+
+-- 8. Nome do dentista e horário
+SELECT f.nome, a.data_hora 
+FROM funcionario f JOIN dentista d ON f.id = d.id_funcionario JOIN agendamento a ON d.id = a.id_dentista;
+
+-- 9. Procedimentos e ID das consultas
+SELECT p.nome, pag.id_consulta 
+FROM procedimento p LEFT JOIN historico_preco hp ON p.id = hp.id_procedimento LEFT JOIN pagamento pag ON hp.valor = pag.valor_pago;
+
+-- 10. CPF do paciente e valor pago
+SELECT p.cpf, pag.valor_pago 
+FROM paciente p JOIN agendamento a ON p.id = a.id_paciente JOIN consulta c ON a.id = c.id_agendamento JOIN pagamento pag ON c.id = pag.id_consulta;
+
+-- 11. Dentista e telefone do paciente
+SELECT f.nome, p.tel 
+FROM dentista d JOIN funcionario f ON d.id_funcionario = f.id JOIN agendamento a ON d.id = a.id_dentista JOIN paciente p ON a.id_paciente = p.id;
+
+-- 12. Salas e consultas (mesmo vazias)
+SELECT s.numero, c.id 
+FROM sala s LEFT JOIN consulta c ON s.id = c.id;
