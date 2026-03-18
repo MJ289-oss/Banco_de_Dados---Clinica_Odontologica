@@ -137,7 +137,7 @@ CREATE TABLE agendamento (
 CREATE TABLE consulta (
     id INT NOT NULL,
     id_agendamento INT NOT NULL,
-    id_anamnese INT NOT NULL,
+    id_anamnese INT,
     data_realizacao TIMESTAMP NOT NULL,
     resumo_clinico VARCHAR(500),
     CONSTRAINT pk_id_consulta PRIMARY KEY (id),
