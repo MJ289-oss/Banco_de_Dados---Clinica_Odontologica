@@ -1,3 +1,4 @@
+INSERT INTO cargo VALUES (1,'Gerente'),(2,'Dentista'),(3,'Faxineiro'),(4,'Recepcionista');
 INSERT INTO especialidade VALUES (1,'Ortodontia'),(2,'Endodontia'),(3,'Implantodontia');
 INSERT INTO doenca VALUES (1,'Diabetes','Tipo 2'),(2,'Hipertensão','Crônica'),(3,'Alergia','Penicilina');
 INSERT INTO procedimento VALUES (1,'Limpeza','Profilaxia'),(2,'Canal','Tratamento'),(3,'Extração','Exodontia');
@@ -6,37 +7,37 @@ INSERT INTO forma_pagamento VALUES (1,'Dinheiro'),(2,'Cartão'),(3,'Pix');
 INSERT INTO sala VALUES (1,101,'Geral'),(2,102,'Cirurgia'),(3,103,'Exame');
 INSERT INTO fornecedor VALUES (1,'Dental Speed','11122233000144','1140028922'),(2,'Surya Dental','44455566000177','1130304040'),(3,'3M Dental','88899900000111','1120201010');
 
-INSERT INTO funcionario (id, nome, cpf, cargo, salario, login, senha) VALUES 
-(1,'Carlos Gerente','11111111101','Gerente',5500.00,'admin','123'),
-(2,'Dr. Ricardo','11111111102','Dentista',8000.00,'dent01','123'),
-(3,'Dra. Ana','11111111103','Dentista',8000.00,'dent02','123'),
-(4,'Dr. Marcos','11111111104','Dentista',8000.00,'dent03','123'),
-(5,'Dra. Julia','11111111105','Dentista',8000.00,'dent04','123'),
-(6,'Dr. Pedro','11111111106','Dentista',8000.00,'dent05','123'),
-(7,'Dra. Luana','11111111107','Dentista',8000.00,'dent06','123'),
-(8,'Dr. Fabio','11111111108','Dentista',8000.00,'dent07','123'),
-(9,'Dra. Beatriz','11111111109','Dentista',8000.00,'dent08','123'),
-(10,'Dra. Simone','11111111110','Dentista',8000.00,'dent09','123'),
-(11,'Dr. Andre','11111111111','Dentista',8000.00,'dent10','123'),
-(12,'Dra. Fernanda','11111111112','Dentista',8000.00,'dent11','123'),
-(13,'Dr. Thiago','11111111113','Dentista',8000.00,'dent12','123'),
-(14,'Dra. Monica','11111111114','Dentista',8000.00,'dent13','123'),
-(15,'Dr. Bruno','11111111115','Dentista',8000.00,'dent14','123'),
-(16,'Dra. Tatiane','11111111116','Dentista',8000.00,'dent15','123'),
-(17,'Dr. Renato','11111111117','Dentista',8000.00,'dent16','123'),
-(18,'Dra. Patricia','11111111118','Dentista',8000.00,'dent17','123'),
-(19,'Dr. Samuel','11111111119','Dentista',8000.00,'dent18','123'),
-(20,'Dr. Igor','11111111120','Dentista',8000.00,'dent19','123'),
-(21,'Dra. Aline','11111111121','Dentista',8000.00,'dent20','123'),
-(22,'Dr. Wilson','11111111122','Dentista',8000.00,'dent21','123'),
-(23,'Maria Faxina','11111111123','Faxineiro',1600.00,'fax01','123'),
-(24,'Rosa Faxina','11111111124','Faxineiro',1600.00,'fax02','123'),
-(25,'Jose Faxina','11111111125','Faxineiro',1600.00,'fax03','123'),
-(26,'Luiz Faxina','11111111126','Faxineiro',1600.00,'fax04','123'),
-(27,'Bia Recep','11111111127','Recepcionista',2100.00,'rec01','123'),
-(28,'Mel Recep','11111111128','Recepcionista',2100.00,'rec02','123'),
-(29,'Sol Recep','11111111129','Recepcionista',2100.00,'rec03','123'),
-(30,'Lia Recep','11111111130','Recepcionista',2100.00,'rec04','123');
+INSERT INTO funcionario (id, id_cargo, nome, cpf, salario, login, senha) VALUES 
+(1, 1, 'Carlos Gerente', '11111111101', 5500.00, 'admin', '123'),
+(2, 2, 'Dr. Ricardo', '11111111102', 8000.00, 'dent01', '123'),
+(3, 2, 'Dra. Ana', '11111111103', 8000.00, 'dent02', '123'),
+(4, 2, 'Dr. Marcos', '11111111104', 8000.00, 'dent03', '123'),
+(5, 2, 'Dra. Julia', '11111111105', 8000.00, 'dent04', '123'),
+(6, 2, 'Dr. Pedro', '11111111106', 8000.00, 'dent05', '123'),
+(7, 2, 'Dra. Luana', '11111111107', 8000.00, 'dent06', '123'),
+(8, 2, 'Dr. Fabio', '11111111108', 8000.00, 'dent07', '123'),
+(9, 2, 'Dra. Beatriz', '11111111109', 8000.00, 'dent08', '123'),
+(10, 2, 'Dra. Simone', '11111111110', 8000.00, 'dent09', '123'),
+(11, 2, 'Dr. Andre', '11111111111', 8000.00, 'dent10', '123'),
+(12, 2, 'Dra. Fernanda', '11111111112', 8000.00, 'dent11', '123'),
+(13, 2, 'Dr. Thiago', '11111111113', 8000.00, 'dent12', '123'),
+(14, 2, 'Dra. Monica', '11111111114', 8000.00, 'dent13', '123'),
+(15, 2, 'Dr. Bruno', '11111111115', 8000.00, 'dent14', '123'),
+(16, 2, 'Dra. Tatiane', '11111111116', 8000.00, 'dent15', '123'),
+(17, 2, 'Dr. Renato', '11111111117', 8000.00, 'dent16', '123'),
+(18, 2, 'Dra. Patricia', '11111111118', 8000.00, 'dent17', '123'),
+(19, 2, 'Dr. Samuel', '11111111119', 8000.00, 'dent18', '123'),
+(20, 2, 'Dr. Igor', '11111111120', 8000.00, 'dent19', '123'),
+(21, 2, 'Dra. Aline', '11111111121', 8000.00, 'dent20', '123'),
+(22, 2, 'Dr. Wilson', '11111111122', 8000.00, 'dent21', '123'),
+(23, 3, 'Maria Faxina', '11111111123', 1600.00, 'fax01', '123'),
+(24, 3, 'Rosa Faxina', '11111111124', 1600.00, 'fax02', '123'),
+(25, 3, 'Jose Faxina', '11111111125', 1600.00, 'fax03', '123'),
+(26, 3, 'Luiz Faxina', '11111111126', 1600.00, 'fax04', '123'),
+(27, 4, 'Bia Recep', '11111111127', 2100.00, 'rec01', '123'),
+(28, 4, 'Mel Recep', '11111111128', 2100.00, 'rec02', '123'),
+(29, 4, 'Sol Recep', '11111111129', 2100.00, 'rec03', '123'),
+(30, 4, 'Lia Recep', '11111111130', 2100.00, 'rec04', '123');
 
 INSERT INTO dentista (id, id_funcionario, id_especialidade, cro) VALUES 
 (1,2,1,'CRO01'),(2,3,2,'CRO02'),(3,4,3,'CRO03'),(4,5,1,'CRO04'),(5,6,2,'CRO05'),(6,7,3,'CRO06'),

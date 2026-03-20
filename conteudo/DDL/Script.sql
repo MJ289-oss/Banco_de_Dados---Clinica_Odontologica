@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS historico_preco;
 DROP TABLE IF EXISTS dentista;
 DROP TABLE IF EXISTS paciente;
 DROP TABLE IF EXISTS funcionario;
+DROP TABLE IF EXISTS cargo;
 DROP TABLE IF EXISTS fornecedor;
 DROP TABLE IF EXISTS sala;
 DROP TABLE IF EXISTS forma_pagamento;
@@ -38,6 +39,12 @@ CREATE TABLE procedimento (
     nome VARCHAR(100) NOT NULL,
     descricao_tecnica VARCHAR(500),
     CONSTRAINT pk_id_procedimento PRIMARY KEY (id)
+);
+
+CREATE TABLE cargo (
+    id INT NOT NULL,
+    nome_cargo VARCHAR(50) NOT NULL,
+    CONSTRAINT pk_id_cargo PRIMARY KEY (id)
 );
 
 CREATE TABLE convenio (
@@ -71,9 +78,9 @@ CREATE TABLE fornecedor (
 
 CREATE TABLE funcionario (
     id INT NOT NULL,
+    id_cargo INT NOT NULL,
     nome VARCHAR(150) NOT NULL,
     cpf CHAR(11) UNIQUE NOT NULL,
-    cargo VARCHAR(50),
     salario DECIMAL(10,2),
     login VARCHAR(50) UNIQUE NOT NULL,
     senha VARCHAR(50) NOT NULL,
