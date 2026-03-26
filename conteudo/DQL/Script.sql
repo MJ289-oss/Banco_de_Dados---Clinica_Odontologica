@@ -45,3 +45,20 @@ FROM dentista d JOIN funcionario f ON d.id_funcionario = f.id JOIN agendamento a
 -- 12. Salas e consultas (mesmo vazias)
 SELECT s.numero, c.id 
 FROM sala s LEFT JOIN consulta c ON s.id = c.id;
+
+
+
+---  GROUP BY, INTERSECT, UNION
+
+
+SELECT f.nome, COUNT(a.id) 
+FROM dentista d JOIN funcionario f ON d.id_funcionario = f.id JOIN agendamento a ON d.id = a.id_dentista 
+GROUP BY f.nome;
+
+SELECT p.nome, SUM(pag.valor_pago) 
+FROM paciente p JOIN agendamento a ON p.id = a.id_paciente JOIN consulta c ON a.id = c.id_agendamento JOIN pagamento pag ON c.id = pag.id_consulta 
+GROUP BY p.nome;
+
+SELECT e.nome_especialidade, COUNT(d.id) 
+FROM especialidade e LEFT JOIN dentista d ON e.id = d.id_especialidade 
+GROUP BY e.nome_especialidade;
