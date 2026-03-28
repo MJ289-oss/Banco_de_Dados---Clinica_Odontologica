@@ -62,3 +62,15 @@ GROUP BY p.nome;
 SELECT e.nome_especialidade, COUNT(d.id) 
 FROM especialidade e LEFT JOIN dentista d ON e.id = d.id_especialidade 
 GROUP BY e.nome_especialidade;
+
+SELECT cv.nome_empresa, SUM(pag.valor_pago) 
+FROM convenio cv JOIN paciente p ON cv.id = p.id_convenio JOIN agendamento a ON p.id = a.id_paciente JOIN consulta c ON a.id = c.id_agendamento JOIN pagamento pag ON c.id = pag.id_consulta 
+GROUP BY cv.nome_empresa;
+
+SELECT nome FROM paciente 
+UNION 
+SELECT f.nome FROM funcionario f JOIN dentista d ON f.id = d.id_funcionario;
+
+SELECT tel FROM paciente 
+UNION ALL 
+SELECT '000-000' FROM funcionario;
