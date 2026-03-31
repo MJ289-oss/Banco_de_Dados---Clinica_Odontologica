@@ -74,3 +74,15 @@ SELECT f.nome FROM funcionario f JOIN dentista d ON f.id = d.id_funcionario;
 SELECT tel FROM paciente 
 UNION ALL 
 SELECT '000-000' FROM funcionario;
+
+SELECT cpf FROM paciente 
+INTERSECT 
+SELECT cpf FROM funcionario;
+
+SELECT e.nome_especialidade, AVG(pag.valor_pago) 
+FROM especialidade e JOIN dentista d ON e.id = d.id_especialidade JOIN agendamento a ON d.id = a.id_dentista JOIN consulta c ON a.id = c.id_agendamento JOIN pagamento pag ON c.id = pag.id_consulta 
+GROUP BY e.nome_especialidade;
+
+SELECT p.cpf FROM paciente p JOIN agendamento a ON p.id = a.id_paciente JOIN consulta c ON a.id = c.id_agendamento 
+UNION 
+SELECT p.cpf FROM paciente p JOIN agendamento a ON p.id = a.id_paciente JOIN consulta c ON a.id = c.id_agendamento JOIN pagamento pag ON c.id = pag.id_consulta;
