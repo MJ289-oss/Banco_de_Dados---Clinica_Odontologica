@@ -86,3 +86,15 @@ GROUP BY e.nome_especialidade;
 SELECT p.cpf FROM paciente p JOIN agendamento a ON p.id = a.id_paciente JOIN consulta c ON a.id = c.id_agendamento 
 UNION 
 SELECT p.cpf FROM paciente p JOIN agendamento a ON p.id = a.id_paciente JOIN consulta c ON a.id = c.id_agendamento JOIN pagamento pag ON c.id = pag.id_consulta;
+
+SELECT TO_CHAR(data_realizacao, 'Month'), COUNT(id) 
+FROM consulta 
+GROUP BY TO_CHAR(data_realizacao, 'Month');
+
+SELECT data_hora::DATE FROM agendamento 
+INTERSECT 
+SELECT data_realizacao::DATE FROM consulta;
+
+SELECT s.numero, COUNT(c.id) 
+FROM sala s JOIN equipamento e ON s.id = e.id_sala JOIN consulta c ON s.id = c.id 
+GROUP BY s.numero;
